@@ -1,7 +1,6 @@
 package com.example.perfectfit_kpm
 
 import androidx.compose.ui.graphics.Color
-import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 

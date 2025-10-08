@@ -6,12 +6,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.getValue
 import com.example.perfectfit_kpm.Models.NavigationManager
+import com.example.perfectfit_kpm.Views.ExportToPDFScreen
 import kotlinx.coroutines.flow.map
 
 
 sealed class Screen {
     object Home : Screen()
     data class Detail(val exercise: Exercise) : Screen()
+    data class ExportReview(val exercises: List<Exercise>) : Screen()
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,6 +51,11 @@ fun App() {
                 is Screen.Home -> MainView(
                     selectedItems = selectedItems,
                     onItemClick = { exercise -> navManager.navigateTo(Screen.Detail(exercise))},
+                    onExportClick = { exercises ->
+                        println("I am being told to navigate $exercises")
+                        navManager.navigateTo(Screen.ExportReview(exercises))
+                        println("current screen ${navManager.currentScreen}")
+                    },
                     innerPadding = innerPadding
                 )
 
@@ -58,6 +65,14 @@ fun App() {
                         if (!selectedItems.contains(updatedItem)) {
                             selectedItems.add(updatedItem)
                         }
+                        navManager.goBack()
+                    }
+                )
+
+                is Screen.ExportReview -> ExportToPDFScreen(
+                    exercises = (currentScreen as Screen.ExportReview).exercises,
+                    innerPadding = innerPadding,
+                    onBack = {
                         navManager.goBack()
                     }
                 )

@@ -1,5 +1,6 @@
 package com.example.perfectfit_kpm
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +21,7 @@ import com.example.perfectfit_kpm.ViewModels.MainViewModel
 fun MainView(
     selectedItems: MutableList<Exercise>,
     onItemClick: (Exercise) -> Unit,
+    onExportClick: (List<Exercise>) -> Unit,
     innerPadding: PaddingValues
 ) {
     val viewModel = MainViewModel()
@@ -32,27 +34,47 @@ fun MainView(
             exercises = viewModel.loadData()
         }
     }
+
     Column(
         modifier = Modifier
             .padding(innerPadding)
             .fillMaxSize()
     ) {
-        SearchBar(
-            placeholder = "Search exercises…",
-            onQueryChange = { search ->
-                query = search
-                exercises = if (query.length >= 2) {
-                    exercises
-                        ?.filter { it.name.contains(query, ignoreCase = true) }
+
+        Box() {
+            SearchBar(
+                placeholder = "Search exercises…",
+                onQueryChange = { search ->
+                    query = search
+                    exercises = if (query.length >= 2) {
+                        exercises
+                            ?.filter { it.name.contains(query, ignoreCase = true) }
 //                            ?.filter { selectedFilter == null || it.equipmentRequired.any { equipment -> equipment == selectedFilter } }
-                } else {
-                    exercises
-                }
-                println("Searching for: $query")
-            },
-            modifier = Modifier.padding(5.dp),
-            query = query
-        )
-        exercises?.let { ExerciseCollectionView(items = it, innerPadding = innerPadding, selectedItems = selectedItems, onItemClick = onItemClick) }
+                    } else {
+                        exercises
+                    }
+                    println("Searching for: $query")
+                },
+                modifier = Modifier.padding(5.dp),
+                query = query
+            )
+            exercises?.let {
+                ExerciseCollectionView(
+                    items = it,
+                    innerPadding = innerPadding,
+                    selectedItems = selectedItems,
+                    onItemClick = onItemClick)
+            }
+            if (selectedItems.isNotEmpty()) {
+                SelectedExercisesBar(
+                    items = selectedItems,
+                    onExportClick = { exercises ->
+                        println("I am passed properly to mainview")
+                        onExportClick(exercises)
+                    },
+                    onRemoveClick = { selectedItems.remove(it) }
+                )
+            }
+        }
     }
 }

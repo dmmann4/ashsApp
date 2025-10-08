@@ -10,12 +10,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ExerciseCollectionView(items: List<Exercise>, innerPadding: PaddingValues, selectedItems: MutableList<Exercise>, onItemClick: (Exercise) -> Unit) {
+fun ExerciseCollectionView(
+    items: List<Exercise>,
+    innerPadding: PaddingValues,
+    selectedItems: MutableList<Exercise>,
+    onItemClick: (Exercise) -> Unit
+) {
     LazyColumn(
         contentPadding = PaddingValues(5.dp),
         modifier = Modifier
             .fillMaxSize(),
-//            .background(MaterialTheme.colorScheme.primaryContainer),
         verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
         items(items) { item ->

@@ -1,18 +1,7 @@
 package com.example.perfectfit_kpm
 
 import kotlinx.serialization.SerialName
-import org.jetbrains.compose.resources.DrawableResource
 import kotlinx.serialization.Serializable
-import perfectfit_kpm.composeapp.generated.resources.Res
-import perfectfit_kpm.composeapp.generated.resources.coremedballtwiststanding
-import perfectfit_kpm.composeapp.generated.resources.corestabilitybanded
-import perfectfit_kpm.composeapp.generated.resources.gastrocrelease
-import perfectfit_kpm.composeapp.generated.resources.hipbridgemedball
-import perfectfit_kpm.composeapp.generated.resources.kettlebellgetup
-import perfectfit_kpm.composeapp.generated.resources.machinerowinclinebench
-import perfectfit_kpm.composeapp.generated.resources.obleiquestretch
-import perfectfit_kpm.composeapp.generated.resources.shoulderstabilitymedball
-import perfectfit_kpm.composeapp.generated.resources.supermanlowbackmedball
 
 @Serializable
 data class Exercise(

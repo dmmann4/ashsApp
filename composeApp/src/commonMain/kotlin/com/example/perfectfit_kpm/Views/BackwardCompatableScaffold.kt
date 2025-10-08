@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -21,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
@@ -65,47 +63,14 @@ fun BackAwareScaffold(
                 titleContentColor = MaterialTheme.colorScheme.background,
                 actionIconContentColor = MaterialTheme.colorScheme.primary
             ),
-//            actions = {
-//                FilterButton(
-////                    selectedFilter = selectedFilter,
-////                    onFilterSelected = { filter ->
-////                        selectedFilter = filter
-////                        exercises = exercises
-////                            ?.filter { it.name.contains(query, ignoreCase = true) }
-////                            ?.filter { selectedFilter == null || it.equipmentRequired.any { equipment -> equipment == selectedFilter } }
-////                    }
-//                )
-//            })
-
         )
         },
         bottomBar = {
-            if (selectedItems.isNotEmpty()) {
-                SelectedExercisesBar(
-                    items = selectedItems,
-                    onRemoveClick = { selectedItems.remove(it) }
-                )
-            }
+
         },
         containerColor = MaterialTheme.colorScheme.background,
         content = { innerPadding ->
             content(innerPadding)
         }
     )
-//    // Your own toolbar or back button (works everywhere)
-//    Scaffold(
-//        topBar = {
-//            if (canGoBack) {
-//                TopAppBar(
-//                    title = { Text("My App") },
-//                    navigationIcon = {
-//                        IconButton(onClick = onBack) {
-//                            Icon(Icons.Default.ArrowBack, contentDescription = "Back")
-//                        }
-//                    }
-//                )
-//            }
-//        },
-//
-//    )
 }

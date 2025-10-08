@@ -29,6 +29,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
+import androidx.compose.runtime.remember
 import perfectfit_kpm.composeapp.generated.resources.Res
 import perfectfit_kpm.composeapp.generated.resources.gastrocrelease
 import perfectfit_kpm.composeapp.generated.resources.kettlebellgetup
@@ -37,6 +38,7 @@ import perfectfit_kpm.composeapp.generated.resources.obleiquestretch
 @Composable
 fun SelectedExercisesBar(
     items: List<Exercise>,
+    onExportClick: (List<Exercise>) -> Unit,
     onRemoveClick: (Exercise) -> Unit
 ) {
 
@@ -95,6 +97,17 @@ fun SelectedExercisesBar(
                                     modifier = Modifier.size(12.dp)
                                 )
                             }
+                        }
+                    }
+                    item {
+                        Button(
+                            onClick = {
+                                /// show preview for export to pdf
+                                onExportClick(items)
+                                println("I am calling click from exercise selection bar -- $items")
+                            }
+                        ) {
+                            Text("Export")
                         }
                     }
                 }

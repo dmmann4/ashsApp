@@ -11,7 +11,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -27,7 +26,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -50,9 +48,8 @@ fun ExerciseDetailScreen(
     var repetitions by remember { mutableStateOf(initialItem.sets) }
     var longDescription by remember { mutableStateOf(initialItem.longDescription) }
     var shortDesc by remember { mutableStateOf(initialItem.shortDescription) }
-//    var equipment by remember { mutableStateOf(initialItem.equipmentRequired.joinToString(", ") { it.stringValue }) }
     var equipment by remember { mutableStateOf(initialItem.equipmentRequired) }
-    var sets by remember { mutableStateOf(initialItem.sets.toString()) }
+    var sets by remember { mutableStateOf(initialItem.sets) }
     var holdLength by remember { mutableStateOf(initialItem.holdLength) }
 
     val painter = when (initialItem.name.lowercase()) {
