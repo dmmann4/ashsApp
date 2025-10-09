@@ -12,49 +12,90 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
-import androidx.compose.material.icons.Icons
+
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
-import androidx.compose.runtime.remember
 import perfectfit_kpm.composeapp.generated.resources.Res
 import perfectfit_kpm.composeapp.generated.resources.gastrocrelease
 import perfectfit_kpm.composeapp.generated.resources.kettlebellgetup
 import perfectfit_kpm.composeapp.generated.resources.obleiquestretch
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.graphics.Color
 
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun SelectedExercisesBar(
     items: List<Exercise>,
     onExportClick: (List<Exercise>) -> Unit,
-    onRemoveClick: (Exercise) -> Unit
+    onRemoveClick: (Exercise) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-
-    Surface(
-        tonalElevation = 4.dp,
-        shadowElevation = 4.dp,
-        color = MaterialTheme.colorScheme.surface,
+    AnimatedVisibility(
+        visible = items.isNotEmpty(),
+        enter = fadeIn() + expandVertically(),
+        exit = fadeOut() + shrinkVertically(),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
-        LazyColumn(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .shadow(10.dp, RoundedCornerShape(20.dp))
+                .background(
+                    color = MaterialTheme.colorScheme.surface,
+                    shape = RoundedCornerShape(20.dp)
+                )
+                .padding(horizontal = 20.dp, vertical = 12.dp)
         ) {
-            item {
-                Text("Exercise Count: ${items.size}", color = MaterialTheme.colorScheme.primary)
-            }
-            item {
+            Column {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = if (items.size > 0) 6.dp else 0.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = "${items.size} selected",
+                        fontSize = 16.sp,
+                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
+                    )
+                    Button(
+                        onClick = { onExportClick(items) },
+                        shape = RoundedCornerShape(12.dp),
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+                    ) {
+                        Text(
+                            text = "Export",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+                }
                 LazyRow(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -99,19 +140,32 @@ fun SelectedExercisesBar(
                             }
                         }
                     }
-                    item {
-                        Button(
-                            onClick = {
-                                /// show preview for export to pdf
-                                onExportClick(items)
-                                println("I am calling click from exercise selection bar -- $items")
-                            }
-                        ) {
-                            Text("Export")
-                        }
-                    }
                 }
             }
         }
     }
 }
+
+
+
+// 🏷️ Show each selected exercise as a chip
+//if (items.isNotEmpty()) {
+//    FlowRow(
+//        horizontalArrangement = Arrangement.spacedBy(8.dp),
+//        verticalArrangement = Arrangement.spacedBy(4.dp)
+//    ) {
+//        items.forEach { ex ->
+//            AssistChip(
+//                onClick = { onRemoveClick(ex) },
+//                label = { Text(ex.name, fontSize = 12.sp) },
+//                leadingIcon = {
+//                    Icon(
+//                        imageVector = Icons.Default.Close,
+//                        contentDescription = "Remove",
+//                        modifier = Modifier.size(14.dp)
+//                    )
+//                }
+//            )
+//        }
+//    }
+//}

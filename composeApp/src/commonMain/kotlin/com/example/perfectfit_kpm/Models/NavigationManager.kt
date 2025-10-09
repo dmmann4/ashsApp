@@ -3,7 +3,7 @@ package com.example.perfectfit_kpm.Models
 import com.example.perfectfit_kpm.Screen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-
+/// look into routes for navigation
 class NavigationManager {
     private val stack = ArrayDeque<Screen>()
     private val _currentScreen = MutableStateFlow<Screen>(Screen.Home)

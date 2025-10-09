@@ -13,9 +13,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -39,6 +39,7 @@ fun ExportToPDFScreen(
     innerPadding: PaddingValues,
     onBack: () -> Unit
 ) {
+    // is this like a thread or something??
     println("I am being shown export pdf screen $exercises")
     LazyColumn(
         modifier = Modifier
@@ -47,6 +48,13 @@ fun ExportToPDFScreen(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
+        item {
+            Button(onClick = {
+
+            }) {
+                Text("Export PDF")
+            }
+        }
         items(exercises) { exercise ->
             val painter = when (exercise.name.lowercase()) {
                 "pushup" -> painterResource(Res.drawable.gastrocrelease)
