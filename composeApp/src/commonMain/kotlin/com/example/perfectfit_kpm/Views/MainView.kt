@@ -26,14 +26,28 @@ fun MainView(
     onExportClick: (List<Exercise>) -> Unit,
     innerPadding: PaddingValues
 ) {
-    val viewModel = MainViewModel()
+    val viewModel = remember { MainViewModel() } // Use remember to keep the same ViewModel instance
     var query by remember { mutableStateOf("") }
-    val exercises by viewModel.data.collectAsState()
-    var selectedFilter by remember { mutableStateOf<Exerciseable?>(null) }
-    var filteredExerecises by remember { mutableStateOf(List<Exercise>) }
+
+    // 1. Collect the original, unmodified list from the ViewModel
+    val allExercises by viewModel.data.collectAsState()
+
+    // 2. Create a separate mutable state for the filtered list that will be displayed
+    var filteredExercises by remember { mutableStateOf<List<Exercise>>(emptyList()) }
+
     LaunchedEffect(Unit) {
         viewModel.loadData()
     }
+
+    // 3. Use LaunchedEffect to react to changes in the original list or the query
+    LaunchedEffect(allExercises, query) {
+        filteredExercises = if (query.length >= 2) {
+            allExercises?.filter { it.name.contains(query, ignoreCase = true) } ?: emptyList()
+        } else {
+            allExercises ?: emptyList()
+        }
+    }
+
 
     Column(
         modifier = Modifier
@@ -44,26 +58,20 @@ fun MainView(
             placeholder = "Search exercises…",
             onQueryChange = { search ->
                 query = search
-                exercises = if (query.length >= 2) {
-                    exercises
-                        ?.filter { it.name.contains(query, ignoreCase = true) }
-//                            ?.filter { selectedFilter == null || it.equipmentRequired.any { equipment -> equipment == selectedFilter } }
-                } else {
-                    exercises
-                }
+                // The LaunchedEffect above will handle the filtering automatically
                 println("Searching for: $query")
             },
             modifier = Modifier.padding(5.dp),
             query = query
         )
-        Box() {
-            exercises?.let {
-                ExerciseCollectionView(
-                    items = it,
-                    innerPadding = innerPadding,
-                    selectedItems = selectedItems,
-                    onItemClick = onItemClick)
-            }
+        Box(modifier = Modifier.fillMaxSize()) { // Make Box fill the remaining space
+            // 4. Use the new filteredExercises state here
+            ExerciseCollectionView(
+                items = filteredExercises,
+                innerPadding = innerPadding,
+                selectedItems = selectedItems,
+                onItemClick = onItemClick)
+
             if (selectedItems.isNotEmpty()) {
                 SelectedExercisesBar(
                     items = selectedItems,

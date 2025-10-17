@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,11 +28,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.perfectfit_kpm.Exercise
+import com.example.perfectfit_kpm.Models.exportExercisesToPdf
+import com.example.perfectfit_kpm.Models.sharePdf
 import org.jetbrains.compose.resources.painterResource
 import perfectfit_kpm.composeapp.generated.resources.Res
 import perfectfit_kpm.composeapp.generated.resources.gastrocrelease
 import perfectfit_kpm.composeapp.generated.resources.kettlebellgetup
 import perfectfit_kpm.composeapp.generated.resources.obleiquestretch
+import kotlinx.coroutines.launch
 
 @Composable
 fun ExportToPDFScreen(
@@ -41,6 +45,7 @@ fun ExportToPDFScreen(
 ) {
     // is this like a thread or something??
     println("I am being shown export pdf screen $exercises")
+    val scope = rememberCoroutineScope()
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -50,7 +55,19 @@ fun ExportToPDFScreen(
     ) {
         item {
             Button(onClick = {
-
+                scope.launch {
+                    val result = exportExercisesToPdf(
+                        exercises = exercises,
+                        pageWidthPoints = 595,
+                        pageHeightPoints = 842
+                    )
+                    sharePdf(
+                        filename = result.filename,
+                        bytes = result.bytes,
+                        subject = "Exercises",
+                        text = "Please find the exercise plan attached."
+                    )
+                }
             }) {
                 Text("Export PDF")
             }

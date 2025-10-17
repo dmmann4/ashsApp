@@ -14,7 +14,9 @@ class MainViewModel {
 
     suspend fun loadData() {
         /// check for null here
-        if (data.value != null) {
+        println("✅ Response body pre null check: " + data.value)
+        println()
+        if (data.value == null) {
             val response = networking.getExercises()
             println("✅ Response body: $data")
             data.value = response

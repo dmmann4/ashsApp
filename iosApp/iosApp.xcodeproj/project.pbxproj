@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		6B67A8D8BE309505584A4F6E /* PerfectFit_KPM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerfectFit_KPM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B67A8D8BE309505584A4F6E /* PerfectFitKPM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerfectFitKPM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -50,7 +50,7 @@
 		8280ED4F7E6D004FD8536FDE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6B67A8D8BE309505584A4F6E /* PerfectFit_KPM.app */,
+				6B67A8D8BE309505584A4F6E /* PerfectFitKPM.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,7 +87,7 @@
 			packageProductDependencies = (
 			);
 			productName = iosApp;
-			productReference = 6B67A8D8BE309505584A4F6E /* PerfectFit_KPM.app */;
+			productReference = 6B67A8D8BE309505584A4F6E /* PerfectFitKPM.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -176,7 +176,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = W53XYJR854;
+				DEVELOPMENT_TEAM = QW8SY24C8U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
@@ -269,7 +269,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = W53XYJR854;
+				DEVELOPMENT_TEAM = QW8SY24C8U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
