@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.perfectfit_kpm.ViewModels.MainViewModel
+import com.example.perfectfit_kpm.Views.BodyPartFilterHorizontalScrollView
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -66,12 +67,19 @@ fun MainView(
         )
         Box(modifier = Modifier.fillMaxSize()) { // Make Box fill the remaining space
             // 4. Use the new filteredExercises state here
-            ExerciseCollectionView(
-                items = filteredExercises,
-                innerPadding = innerPadding,
-                selectedItems = selectedItems,
-                onItemClick = onItemClick)
-
+            Column(modifier = Modifier.fillMaxSize()) {
+                BodyPartFilterHorizontalScrollView(
+                    viewModel = viewModel,
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                )
+                ExerciseCollectionView(
+                    items = filteredExercises,
+                    innerPadding = innerPadding,
+                    selectedItems = selectedItems,
+                    onItemClick = onItemClick
+                )
+            }
             if (selectedItems.isNotEmpty()) {
                 SelectedExercisesBar(
                     items = selectedItems,
@@ -85,6 +93,7 @@ fun MainView(
                     onRemoveClick = { selectedItems.remove(it) }
                 )
             }
+
         }
     }
 }

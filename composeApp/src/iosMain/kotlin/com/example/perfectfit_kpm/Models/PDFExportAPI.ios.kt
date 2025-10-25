@@ -19,9 +19,6 @@ actual suspend fun exportExercisesToPdf(
     pageWidthPoints: Int,
     pageHeightPoints: Int
 ): PdfExportResult = withContext(Dispatchers.Main) {
-
-    // Directly render from exercises; no ObjC bridge or NSDictionary needed
-
     val pageRect = CGRectMake(0.0, 0.0, pageWidthPoints.toDouble(), pageHeightPoints.toDouble())
     val mutableData = NSMutableData()
     UIGraphicsBeginPDFContextToData(mutableData, pageRect, null)

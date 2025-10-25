@@ -145,27 +145,3 @@ fun SelectedExercisesBar(
         }
     }
 }
-
-
-
-// 🏷️ Show each selected exercise as a chip
-//if (items.isNotEmpty()) {
-//    FlowRow(
-//        horizontalArrangement = Arrangement.spacedBy(8.dp),
-//        verticalArrangement = Arrangement.spacedBy(4.dp)
-//    ) {
-//        items.forEach { ex ->
-//            AssistChip(
-//                onClick = { onRemoveClick(ex) },
-//                label = { Text(ex.name, fontSize = 12.sp) },
-//                leadingIcon = {
-//                    Icon(
-//                        imageVector = Icons.Default.Close,
-//                        contentDescription = "Remove",
-//                        modifier = Modifier.size(14.dp)
-//                    )
-//                }
-//            )
-//        }
-//    }
-//}

@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.perfectfit_kpm.Exercise
 import com.example.perfectfit_kpm.Models.exportExercisesToPdf
-import com.example.perfectfit_kpm.Models.sharePdf
 import org.jetbrains.compose.resources.painterResource
 import perfectfit_kpm.composeapp.generated.resources.Res
 import perfectfit_kpm.composeapp.generated.resources.gastrocrelease
@@ -60,12 +59,6 @@ fun ExportToPDFScreen(
                         exercises = exercises,
                         pageWidthPoints = 595,
                         pageHeightPoints = 842
-                    )
-                    sharePdf(
-                        filename = result.filename,
-                        bytes = result.bytes,
-                        subject = "Exercises",
-                        text = "Please find the exercise plan attached."
                     )
                 }
             }) {

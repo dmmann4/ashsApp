@@ -6,7 +6,17 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.perfectfit_kpm.Models.MainActivityHolder
+
+import android.app.Activity
+
+/**
+ * A simple object to hold a static reference to the MainActivity.
+ * This can be useful for accessing the activity context from other parts of the application,
+ * but be cautious of memory leaks.
+ */
+object MainActivityHolder {
+    var activity: Activity? = null
+}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

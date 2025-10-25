@@ -30,6 +30,7 @@ fun BackAwareScaffold(
     onBack: () -> Unit,
     actions: @Composable RowScope.() -> Unit = {},
     selectedItems: MutableList<Exercise>,
+    bottomBar: @Composable () -> Unit = {},
     content: @Composable (innerPadding: PaddingValues) -> Unit
 ) {
     var selectedFilter by remember { mutableStateOf<Exerciseable?>(null) }
@@ -66,7 +67,7 @@ fun BackAwareScaffold(
         )
         },
         bottomBar = {
-
+            bottomBar()
         },
         containerColor = MaterialTheme.colorScheme.background,
         content = { innerPadding ->
