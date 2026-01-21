@@ -25,7 +25,7 @@ class Networking {
         }
     }
     suspend fun getExercises(): List<Exercise> {
-        val response: ExerciseResponse = httpClient.get("https://api.jsonbin.io/v3/b/68df0e7ed0ea881f4093647c"){
+        val response: ExerciseResponse = httpClient.get("https://api.jsonbin.io/v3/b/69711660ae596e708feba4a4"){
             headers {
                 append("X-MASTER-KEY", masterKey)
                 append("X-ACCESS-KEY", accessKey)

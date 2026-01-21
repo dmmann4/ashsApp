@@ -30,9 +30,6 @@ private enum class BottomTab(val label: String) {
     Settings("Settings")
 }
 
-
-/// state rememberable set in nav host when navigating 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun App() {

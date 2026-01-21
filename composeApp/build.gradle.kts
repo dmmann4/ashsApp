@@ -31,6 +31,7 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.okhttp)
+            implementation("com.github.bumptech.glide:glide:4.16.0")
         }
         commonMain.dependencies {
             implementation(compose.runtime)

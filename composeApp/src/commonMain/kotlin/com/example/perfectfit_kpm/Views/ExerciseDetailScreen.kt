@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -32,6 +34,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.perfectfit_kpm.Views.MediaPlayerView
 import org.jetbrains.compose.resources.painterResource
 import perfectfit_kpm.composeapp.generated.resources.Res
 import perfectfit_kpm.composeapp.generated.resources.gastrocrelease
@@ -51,6 +54,7 @@ fun ExerciseDetailScreen(
     var equipment by remember { mutableStateOf(initialItem.equipmentRequired) }
     var sets by remember { mutableStateOf(initialItem.sets) }
     var holdLength by remember { mutableStateOf(initialItem.holdLength) }
+    var media = listOf(initialItem.imageRes)
 
     val painter = when (initialItem.name.lowercase()) {
         "pushup" -> painterResource(Res.drawable.gastrocrelease)
@@ -100,15 +104,28 @@ fun ExerciseDetailScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             item {
-                Image(
-                    painter = painter,
-                    contentDescription = name,
-                    contentScale = ContentScale.Crop,
+//                Image(
+//                    painter = painter,
+//                    contentDescription = name,
+//                    contentScale = ContentScale.Crop,
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .height(120.dp)
+//                        .clip(RoundedCornerShape(8.dp))
+//                )
+                LazyRow(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(120.dp)
                         .clip(RoundedCornerShape(8.dp))
-                )
+                ) {
+                    items(media.size) { url ->
+                        MediaPlayerView(
+                            mediaUrl = media[url],
+                            modifier = Modifier.size(200.dp)
+                        )
+                    }
+                }
             }
             item {
                 Text(text = name, fontWeight = FontWeight.Bold, fontSize = 20.sp)
